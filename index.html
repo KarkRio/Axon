@@ -2252,6 +2252,10 @@ textarea{resize:none;min-height:90px;line-height:1.6;font-weight:300}
 .th-forest{--bg:#080f0a;--bg2:#0f1a11;--bg3:#15221a}
 
 
+.wo-day-header{border-radius:12px;padding:10px 14px;margin-bottom:10px;display:flex;align-items:center;gap:10px}
+.wo-day-label{font-family:var(--font-mono);font-size:var(--text-xs);letter-spacing:2px;text-transform:uppercase;font-weight:600;opacity:.8}
+.wo-day-focus{font-size:var(--text-sm);font-weight:500;color:var(--tx)}
+.wo-day-badge{font-family:var(--font-mono);font-size:9px;padding:2px 8px;border-radius:20px;font-weight:600}
 /* ══ FINAL OVERRIDES — AXON COLOR SYSTEM ══ */
 :root{--ac:#3dd68c!important;--accent:#3dd68c!important}
 .btn.ac,.btn-primary,.sav{background:var(--accent)!important;color:#0a0f0a!important;border-color:transparent!important}
@@ -2795,13 +2799,43 @@ const WMISSION_POOL=[
 ];
 
 const DEF_WO={
-Seg:{focus:"💪 PEITO + PERNAS + CORE",exercises:[{name:"Flexões",sets:3,reps:"8",unit:"rep",restSec:60},{name:"Agachamentos",sets:3,reps:"12",unit:"rep",restSec:60},{name:"Prancha",sets:3,reps:"25",unit:"seg",isTimer:true,timerSec:25,restSec:45},{name:"Alongamento leve",sets:1,reps:"5",unit:"min",isTimer:true,timerSec:300,restSec:0}]},
-Ter:{focus:"🌊 MOBILIDADE / RECUPERAÇÃO",exercises:[{name:"Alongamento de peito",sets:1,reps:"2",unit:"min",isTimer:true,timerSec:120,restSec:0},{name:"Alongamento de ombro",sets:1,reps:"2",unit:"min",isTimer:true,timerSec:120,restSec:0},{name:"Alongamento de pernas",sets:1,reps:"2",unit:"min",isTimer:true,timerSec:120,restSec:0},{name:"Caminhada leve",sets:1,reps:"7",unit:"min",isTimer:true,timerSec:420,restSec:0}]},
-Qua:{focus:"💪 PEITO + PERNAS",exercises:[{name:"Flexões",sets:4,reps:"8",unit:"rep",restSec:60},{name:"Agachamentos",sets:3,reps:"15",unit:"rep",restSec:60},{name:"Prancha lateral",sets:2,reps:"20",unit:"seg",isTimer:true,timerSec:20,restSec:45},{name:"Alongamento leve",sets:1,reps:"5",unit:"min",isTimer:true,timerSec:300,restSec:0}]},
-Qui:{focus:"🔥 CORE + MOBILIDADE",exercises:[{name:"Prancha",sets:3,reps:"30",unit:"seg",isTimer:true,timerSec:30,restSec:45},{name:"Abdominal simples",sets:3,reps:"12",unit:"rep",restSec:45},{name:"Alongamento de costas",sets:1,reps:"2",unit:"min",isTimer:true,timerSec:120,restSec:0},{name:"Alongamento de pernas",sets:1,reps:"2",unit:"min",isTimer:true,timerSec:120,restSec:0}]},
-Sex:{focus:"💪 PEITO + PERNAS + CORE",exercises:[{name:"Flexões",sets:4,reps:"10",unit:"rep",restSec:60},{name:"Agachamentos",sets:4,reps:"15",unit:"rep",restSec:60},{name:"Prancha",sets:3,reps:"30",unit:"seg",isTimer:true,timerSec:30,restSec:45},{name:"Alongamento",sets:1,reps:"5",unit:"min",isTimer:true,timerSec:300,restSec:0}]},
-Sáb:{focus:"🕊 TREINO LEVE / CONTROLE",exercises:[{name:"Flexões lentas",sets:3,reps:"6",unit:"rep",restSec:60},{name:"Agachamentos",sets:3,reps:"12",unit:"rep",restSec:60},{name:"Prancha",sets:2,reps:"20",unit:"seg",isTimer:true,timerSec:20,restSec:45},{name:"Mobilidade geral",sets:1,reps:"5",unit:"min",isTimer:true,timerSec:300,restSec:0}]},
-Dom:{focus:"😌 DESCANSO TOTAL",exercises:[]}
+Seg:{focus:"EMPURRAR + PLANCHE BASE + CORE",exercises:[
+  {name:"Pseudo Planche Push-up (inclinado à frente)",sets:3,reps:"6-8",unit:"rep",restSec:90,note:"Dedos apontados para trás, peso à frente dos pulsos. Controle total."},
+  {name:"Flexões lentas (3s descida)",sets:3,reps:"8-12",unit:"rep",restSec:75,note:"3 segundos a descer, 1 segundo em cima. Tensão constante."},
+  {name:"Planche lean (inclinar à frente)",sets:3,reps:"20",unit:"seg",isTimer:true,timerSec:20,restSec:60,note:"Mãos no chão, empurra o chão e inclina o corpo. Cotovelos bloqueados."},
+  {name:"Hollow body hold",sets:3,reps:"30",unit:"seg",isTimer:true,timerSec:30,restSec:45,note:"Costas planas no chão, lombar colada, pernas 30° do chão. Sente o core a 'fechar'."}
+]},
+Ter:{focus:"CORE PESADO + CONTROLE",exercises:[
+  {name:"Dragon flag (negativa)",sets:3,reps:"3-5",unit:"rep",restSec:120,note:"Agarra a base, corpo recto. Desce LENTO 3-4 segundos. A subida pode ser auxiliada."},
+  {name:"Reverse crunch lento",sets:3,reps:"10-15",unit:"rep",restSec:60,note:"Costas no chão. Levanta os joelhos ao peito, eleva o quadril, desce controlado."},
+  {name:"Prancha com toque no ombro",sets:3,reps:"20",unit:"toques",restSec:60,note:"Em prancha alta. Toca o ombro oposto mantendo o quadril estável — sem balançar."},
+  {name:"Hollow hold leve",sets:2,reps:"20",unit:"seg",isTimer:true,timerSec:20,restSec:30,note:"Recuperação ativa. Ativa core sem esforço máximo."}
+]},
+Qua:{focus:"PERNAS — BASE DE FORÇA",exercises:[
+  {name:"Agachamento lento (3s descida)",sets:4,reps:"12-15",unit:"rep",restSec:75,note:"3 segundos a descer, coxa paralela ao chão. Joelhos sobre os pés. Postura perfeita."},
+  {name:"Afundos (lunges)",sets:3,reps:"10 cada",unit:"rep",restSec:60,note:"Passo largo, joelho traseiro quase no chão. Costas rectas. Alternados."},
+  {name:"Wall sit",sets:3,reps:"45",unit:"seg",isTimer:true,timerSec:45,restSec:60,note:"90° nas pernas. Costas planas na parede. Respira devagar. Não aguentas? Aumenta o ângulo."},
+  {name:"Elevação de gémeos",sets:3,reps:"20",unit:"rep",restSec:45,note:"Sobe devagar, segura 1s em cima, desce devagar. Podes usar degrau para amplitude total."}
+]},
+Qui:{focus:"MOBILIDADE + CORE LEVE",exercises:[
+  {name:"Alongamento ombro e peito",sets:1,reps:"2",unit:"min",isTimer:true,timerSec:120,restSec:0,note:"Braço cruzado ao peito (ombro). Depois mãos atrás entrelaçadas, abre o peito."},
+  {name:"Alongamento pernas completo",sets:1,reps:"2",unit:"min",isTimer:true,timerSec:120,restSec:0,note:"Isquiotibiais, quadriceps, panturrilha. 30-40s cada posição."},
+  {name:"Prancha leve",sets:2,reps:"25",unit:"seg",isTimer:true,timerSec:25,restSec:30,note:"Sem esforço máximo. Só ativar o core e manter posição."},
+  {name:"Movimento livre (caminhada ou dança)",sets:1,reps:"8",unit:"min",isTimer:true,timerSec:480,restSec:0,note:"Sem objectivo. Só mexe o corpo de forma prazerosa."}
+]},
+Sex:{focus:"FORÇA TOTAL — MISTO",exercises:[
+  {name:"Flexões explosivas",sets:3,reps:"6-10",unit:"rep",restSec:90,note:"Sobe RÁPIDO (quase saltar), desce controlado 2s. Potência + controle."},
+  {name:"Tuck planche no chão",sets:3,reps:"15",unit:"seg",isTimer:true,timerSec:15,restSec:75,note:"Em suporte nas mãos, joelhos ao peito, costas redondas, eleva os quadris. Empurra o chão."},
+  {name:"Mountain climbers",sets:3,reps:"20",unit:"rep",restSec:45,note:"Ritmo controlado, não rápido demais. Core activo durante todo o movimento."},
+  {name:"Prancha forte (máxima tensão)",sets:3,reps:"35",unit:"seg",isTimer:true,timerSec:35,restSec:60,note:"Aperta glúteos, pressiona calcanhar para trás, rosca o umbigo para dentro. Tudo contrai."}
+]},
+Sáb:{focus:"CONTROLE E TÉCNICA",exercises:[
+  {name:"Flexões lentas — técnica pura",sets:2,reps:"6",unit:"rep",restSec:90,note:"3s descer, 2s subir. Sem cheating. Sentir cada músculo."},
+  {name:"Hollow hold",sets:2,reps:"20",unit:"seg",isTimer:true,timerSec:20,restSec:45,note:"Consolidar o padrão de movimento. Não é desafio — é prática."},
+  {name:"Agachamento leve",sets:2,reps:"10",unit:"rep",restSec:45,note:"Foco na postura, amplitude total, respiração."},
+  {name:"Respiração diafragmática",sets:1,reps:"3",unit:"min",isTimer:true,timerSec:180,restSec:0,note:"Inspira pelo nariz 4s, retém 4s, expira pela boca 6s. Activa o parassimpático."}
+]},
+Dom:{focus:"DESCANSO TOTAL — RECUPERAÇÃO OBRIGATÓRIA",exercises:[]}
 };
 
 const DEF_SCH={
@@ -3365,11 +3399,11 @@ function renderWorkout(){const dn=dayN(),plan=getWO()[dn],tk=tkey(),ws=S.workout
 let h=`<div class="card fu" style="border-left:3px solid var(--gold)"><div style="font-size:.6em;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:4px">Hoje · ${dn}</div><h2 style="font-family:Fraunces,serif;font-size:1.05em;font-weight:300">${plan.focus}</h2></div>`;
 if(dn!=='Dom'&&plan.exercises.length){
 h+=`<div id="exBox" style="display:none;background:#d4a85318;border:1px solid #d4a85350;border-radius:var(--r);padding:14px;margin-bottom:10px;text-align:center"><div style="font-size:.6em;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px" id="exLbl">EXERCÍCIO</div><div style="font-family:Fraunces,serif;font-size:2.5em;font-weight:300;color:var(--gold)" id="exNum">0</div><button class="btn" style="margin-top:6px;font-size:.72em" onclick="stopExTimer()">✕ Cancelar</button></div>`;
-plan.exercises.forEach((ex,ei)=>{const sArr=ws[ei]||[];const allDone=sArr.filter(Boolean).length>=ex.sets;h+=`<div class="ex-card fu" style="${allDone?'opacity:.5':''}"><div class="ex-done ${allDone?'on':''}" onclick="toggleAllSets(${ei},'${tk}','${dn}')">${allDone?'✓':''}</div><div style="flex:1;min-width:0"><div style="font-size:.9em;font-weight:600;margin-bottom:1px">${ex.name}</div><div style="font-size:.68em;color:var(--tx3)">${ex.sets} × ${ex.reps} ${ex.unit}</div><div style="display:flex;gap:5px;margin-top:6px;flex-wrap:wrap">${[...Array(ex.sets)].map((_,si)=>`<div class="set-dot ${sArr[si]?'on':''}" onclick="toggleSet(${ei},${si},'${tk}','${dn}')">${si+1}</div>`).join('')}</div></div><button style="background:var(--bg3);border:1px solid var(--bd);border-radius:8px;padding:5px 9px;font-size:.68em;color:var(--tx2);cursor:pointer;white-space:nowrap;flex-shrink:0" onclick="startExTimer(${ex.isTimer?ex.timerSec:ex.restSec||60},'${ex.name}')">⏱ ${ex.isTimer?ex.timerSec:ex.restSec||60}s</button></div>`});
+plan.exercises.forEach((ex,ei)=>{const sArr=ws[ei]||[];const allDone=sArr.filter(Boolean).length>=ex.sets;h+=`<div class="ex-card fu" style="${allDone?'opacity:.5':''}"><div class="ex-done ${allDone?'on':''}" onclick="toggleAllSets(${ei},'${tk}','${dn}')">${allDone?'✓':''}</div><div style="flex:1;min-width:0"><div style="font-size:.9em;font-weight:600;margin-bottom:1px">${ex.name}</div><div style="font-size:.68em;color:var(--tx3)">${ex.sets} × ${ex.reps} ${ex.unit}</div>${ex.note?`<div style="font-size:.67em;color:var(--text-muted);margin-top:4px;font-weight:300;line-height:1.5;font-style:italic">${ex.note}</div>`:''}<div style="display:flex;gap:5px;margin-top:6px;flex-wrap:wrap">${[...Array(ex.sets)].map((_,si)=>`<div class="set-dot ${sArr[si]?'on':''}" onclick="toggleSet(${ei},${si},'${tk}','${dn}')">${si+1}</div>`).join('')}</div></div><button class="btn" style="padding:5px 9px;font-size:.62em;white-space:nowrap;flex-shrink:0" onclick="startExTimer(${ex.isTimer?ex.timerSec:ex.restSec||60},'${ex.name}')">⏱ ${ex.isTimer?ex.timerSec:ex.restSec||60}s</button></div>`});
 const total=plan.exercises.reduce((a,e)=>a+e.sets,0);const done2=Object.values(ws).reduce((a,s)=>a+(Array.isArray(s)?s.filter(Boolean).length:0),0);
 h+=`<div class="card fu" style="text-align:center"><div style="font-size:.82em;color:var(--tx3)">${done2}/${total} séries</div>${done2>=total?'<div style="font-size:1.3em;margin-top:5px">💪</div><div style="font-size:.82em;color:var(--ac);margin-top:3px">Treino completo! +50 XP</div>':''}</div>`;
-h+=`<div class="card fu"><div class="ct2">⚠️ Regras</div><p style="font-size:.8em;color:var(--tx3);line-height:1.9">· Não treinar até falhar nas primeiras semanas<br>· Se dolorido, reduz repetições<br>· Dormir bem acelera recuperação<br>· Beber água suficiente<br>· Constância — parar reinicia o ciclo de dor muscular</p></div>`;
-h+=`<div class="card fu"><div class="ct2">📈 Progressão (após 3 semanas)</div><p style="font-size:.8em;color:var(--tx3);line-height:1.9">💪 Flexões → +2 rep por série<br>🔥 Prancha → +10 segundos<br>🏋️ Agachamentos → +5 rep</p></div>`;
+h+=`<div class="card-subtle fu" style="border-left:2px solid var(--danger)"><div style="font-size:var(--text-xs);letter-spacing:2px;color:var(--danger);text-transform:uppercase;font-weight:600;margin-bottom:8px;opacity:.8">Regras do Nível 2</div><div style="display:flex;flex-direction:column;gap:6px">${[['Controle acima de quantidade','Cada rep perfeita vale mais do que 3 rep descuidadas'],['Postura perfeita sempre','Se a forma quebra, para. Descansa. Recomeça.'],['Descanso é treino','Sem descanso não há crescimento — o músculo cresce em repouso'],['Nunca treinar até falhar','Guarda 1-2 reps na reserva']].map(([t,d])=>`<div style="display:flex;gap:8px"><div style="width:4px;height:4px;border-radius:50%;background:var(--danger);flex-shrink:0;margin-top:6px"></div><div><div style="font-size:var(--text-sm);color:var(--tx);font-weight:500">${t}</div><div style="font-size:var(--text-xs);color:var(--text-muted);font-weight:300">${d}</div></div></div>`).join('')}</div></div>`;
+h+=`<div class="card-subtle fu" style="border-left:2px solid var(--accent)"><div style="font-size:var(--text-xs);letter-spacing:2px;color:var(--accent);text-transform:uppercase;font-weight:600;margin-bottom:8px;opacity:.8">⚔️ Progressão — após 2-3 semanas</div><div style="display:flex;flex-direction:column;gap:6px">${[['+2 reps nas flexões','Quando 8 estiver fácil e a forma mantida'],['+5-10s nas isometrias','Hollow hold, planche lean, wall sit'],['+controle no dragon flag','Não mais reps — mais lento e sólido'],['Tuck planche → mais tempo','+5s por semana quando a forma for sólida']].map(([t,d])=>`<div style="display:flex;gap:8px"><div style="width:4px;height:4px;border-radius:50%;background:var(--accent);flex-shrink:0;margin-top:6px"></div><div><div style="font-size:var(--text-sm);color:var(--tx);font-weight:500">${t}</div><div style="font-size:var(--text-xs);color:var(--text-muted);font-weight:300">${d}</div></div></div>`).join('')}</div><div style="margin-top:10px;padding:10px 12px;background:rgba(61,214,140,.04);border-radius:10px;border:1px solid rgba(61,214,140,.12);font-size:var(--text-sm);color:var(--text-secondary);font-style:italic;font-weight:300">"Não é sobre fazer muito… é sobre dominar o próprio corpo."</div></div>`;
 h+=`<div class="card fu"><div class="ct2">📝 Nota do treino</div><textarea class="jarea" style="min-height:55px" id="wNote" placeholder="Como foi? Dor muscular? Energia?">${S.exercise[tk]?.note||''}</textarea><button class="sav" onclick="saveWN('${tk}')">Salvar</button></div>`;
 }else if(dn==='Dom')h+=`<div class="card fu" style="text-align:center;padding:20px"><div style="font-size:2em">😌</div><p style="font-size:.82em;color:var(--tx3);margin-top:8px;line-height:1.7">Descanso total.<br>Caminhar, relaxar e recuperar.</p></div>`;
 document.getElementById('rob').innerHTML=h}
