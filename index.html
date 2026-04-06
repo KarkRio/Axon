@@ -10,7 +10,16 @@
 <title>Axon — Neural Habits</title>
 <link rel="manifest" href="manifest.json"/>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Fraunces:ital,wght@0,300;0,500;1,300&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
-<style>
+<style>/* ── HEADER ── */
+.hdr { flex-shrink:0; height:52px; padding:0 12px 0 16px; display:flex; align-items:center; gap:8px; background:rgba(9,14,9,.97); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); border-bottom:1px solid var(--border); overflow:hidden }
+.hdr-brand { flex:1; min-width:0; overflow:hidden }
+.hdr-sub { font-size:10px; color:var(--t3); letter-spacing:.5px; font-family:var(--mono); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; margin-bottom:1px }
+.hdr-app { font-family:var(--mono); font-size:1.05em; font-weight:500; letter-spacing:1px; color:var(--t1) }
+.hdr-app em { font-style:normal; color:var(--g) }
+.hdr-btns { display:flex; gap:4px; align-items:center; flex-shrink:0 }
+.hbtn { width:30px; height:30px; border-radius:8px; background:rgba(255,255,255,.04); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:.82em; transition:all .12s; flex-shrink:0 }
+.hbtn:active { background:rgba(61,214,140,.1);border-color:rgba(61,214,140,.3);transform:scale(.9) }
+
 /* ═══════════════════════════════════════════════════════
    AXON — Neural Habits · Design System v2.0
    Aesthetic: Premium dark OS · Linear/Raycast inspired
@@ -62,20 +71,7 @@ body {
 }
 
 /* ─── HEADER ─── */
-.hdr {
-  flex-shrink: 0;
-  height: var(--hdr-h);
-  display: flex;
-  align-items: center;
-  padding: 0 16px;
-  gap: 10px;
-  background: rgba(8,10,15,0.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border);
-  position: relative;
-  z-index: 50;
-}
+.hdr { flex-shrink:0; height:52px; padding:0 12px 0 16px; display:flex; align-items:center; gap:8px; background:rgba(9,14,9,.97); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); border-bottom:1px solid var(--border); overflow:hidden }
 .hdr::after {
   content: '';
   position: absolute;
@@ -83,12 +79,7 @@ body {
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--border-hi) 30%, var(--border-hi) 70%, transparent);
 }
-.hdr-brand {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  min-width: 0;
-}
+.hdr-brand { flex:1; min-width:0; overflow:hidden }
 .hdr-sup {
   font-size: 10px;
   font-family: var(--mono);
@@ -250,17 +241,7 @@ body {
 #ct::-webkit-scrollbar { width: 0; }
 
 /* ─── NAVIGATION ─── */
-.nav {
-  flex-shrink: 0;
-  height: var(--nav-h);
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  background: rgba(8,10,15,0.9);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border-top: 1px solid var(--border);
-  padding-bottom: env(safe-area-inset-bottom, 0px);
-}
+.nav { flex-shrink:0; display:grid; grid-template-columns:repeat(6,1fr); background:rgba(9,14,9,.97); backdrop-filter:blur(24px); -webkit-backdrop-filter:blur(24px); border-top:1px solid var(--border); padding:4px 2px calc(4px + env(safe-area-inset-bottom,0px)); position:sticky; bottom:0 }
 .nav-item {
   display: flex;
   flex-direction: column;
@@ -1525,28 +1506,30 @@ textarea { resize: none; min-height: 88px; line-height: 1.6; font-weight: 300; }
     </div>
   </div>
   <div class="score-bar" id="sbar">
-    <div class="bs-ring">
-      <svg width="46" height="46" viewBox="0 0 46 46">
-        <circle cx="23" cy="23" r="18" fill="none" stroke="var(--border)" stroke-width="3"/>
-        <circle id="ringFill" cx="23" cy="23" r="18" fill="none" stroke="var(--g)" stroke-width="3"
-          stroke-linecap="round" transform="rotate(-90 23 23)"
-          stroke-dasharray="113.1" stroke-dashoffset="113.1"
+    <div class="bs-ring" style="position:relative;width:34px;height:34px;flex-shrink:0">
+      <svg width="34" height="34" viewBox="0 0 34 34">
+        <circle cx="17" cy="17" r="13" fill="none" stroke="var(--border)" stroke-width="2.5"/>
+        <circle id="ringFill" cx="17" cy="17" r="13" fill="none" stroke="var(--g)" stroke-width="2.5"
+          stroke-linecap="round" transform="rotate(-90 17 17)"
+          stroke-dasharray="81.7" stroke-dashoffset="81.7"
           style="transition:stroke-dashoffset .5s,stroke .3s"/>
       </svg>
-      <div class="bs-ring-num" id="scoreNum">0</div>
+      <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:.62em;font-weight:600;color:var(--g)" id="scoreNum">0</div>
     </div>
-    <div class="xp-section">
-      <div class="xp-row">
-        <span class="xp-lv" id="levelDisp">Nv 1</span>
-        <span class="xp-title" id="titleDisp">Iniciante</span>
+    <div class="xp-section" style="flex:1;min-width:0">
+      <div style="display:flex;align-items:center;gap:5px;margin-bottom:2px">
+        <span id="levelDisp" style="font-family:var(--mono);font-size:10px;color:var(--g);font-weight:500">Nv 1</span>
+        <span id="titleDisp" style="font-size:10px;color:var(--t3);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1">Iniciante</span>
       </div>
-      <div class="xp-bar-bg"><div class="xp-bar-fill" id="xpBar" style="width:0%"></div></div>
-      <div style="font-size:.5em;color:var(--t3);margin-top:2px;font-family:'Share Tech Mono',monospace" id="xpDisp">0/200 XP</div>
+      <div style="height:2px;background:var(--border);border-radius:2px;overflow:hidden">
+        <div id="xpBar" style="height:100%;background:linear-gradient(90deg,var(--g),var(--g2));border-radius:2px;transition:width .4s;width:0%"></div>
+      </div>
+      <div id="xpDisp" style="font-size:9px;color:var(--t3);margin-top:1px;font-family:var(--mono)">0/200 XP</div>
     </div>
-    <div class="streak-pill">🔥<span id="streakDisp">0</span></div>
+    <div class="streak-pill" id="streakPill">🔥<span id="streakDisp">0</span></div>
     <div class="freeze-pill" onclick="openHelp('streakfreeze')">❄️<span id="freezeDisp">0</span></div>
   </div>
-  <div id="modeBanner" class="mode-banner" style="display:none"></div>
+  <div id="modeBanner" class="mode-bar"></div>
   <div class="sunset" id="sunsetBar">
     <span>🌅</span>
     <span style="flex:1;color:var(--t3)" id="sunsetTxt">Digital Sunset</span>
@@ -2107,16 +2090,13 @@ function calcScore(){const tk=tkey();let sc=0,mx=0;const sl=S.sleep[tk];if(sl?.h
 function updateUI(){
   const score=calcScore();S.brainscore[tkey()]=score;
   // Score ring (new IDs)
-  const fill=document.getElementById('ringFill');
+    const fill=document.getElementById('ringFill');
   if(fill){
-    const circ=2*Math.PI*18;
+    const circ=2*Math.PI*13;
     fill.style.strokeDasharray=circ;
     fill.style.strokeDashoffset=circ-(score/100)*circ;
-    const col=score>=80?'var(--g)':score>=60?'var(--amber)':score>=40?'var(--red)':'var(--border)';
+    const col=score>=80?'var(--g)':score>=60?'var(--gold)':score>=40?'var(--red)':'var(--border)';
     fill.style.stroke=col;
-    // Dynamic glow based on score
-    const glowIntensity=score>=80?'drop-shadow(0 0 8px '+col+')':score>=60?'drop-shadow(0 0 4px '+col+')':'none';
-    fill.style.filter=glowIntensity;
   }
   const sn=document.getElementById('scoreNum');if(sn)sn.textContent=score;
   // XP bar
@@ -3848,17 +3828,19 @@ ${TUTORIAL_PAGES.map((_,i)=>`<div style="width:6px;height:6px;border-radius:50%;
 
 // ════ TEMPORAL MODE ════
 function updateTemporalMode(){
-  const h=new Date().getHours();const ban=document.getElementById('modeBanner');if(!ban)return;
+  const h=new Date().getHours();
+  const ban=document.getElementById('modeBanner');if(!ban)return;
   let mode=null;
-  if(h>=5&&h<9){mode={cls:'mode-morning banner banner-morning',icon:'🌅',txt:'Manhã · janela de cortisol activa'}}
-  else if(h>=9&&h<12){const wp=calcSleepDebt()===0?'✅ Janela de foco profundo activa':'⚠️ Dívida de sono pode prejudicar foco';mode={cls:'mode-focus banner banner-mode',icon:'🎯',txt:'Foco · '+wp}}
-  else if(h>=13&&h<15){mode={cls:'mode-dip banner banner-dip',icon:'😴',txt:'Dip pós-prandial — powernap de 20min ou caminhada de 10min restaura 90% do desempenho.'}}
-  else if(h>=21&&h<24){mode={cls:'mode-wind',icon:'🌙',txt:'Wind-Down — reduz estímulos e ecrãs. O sistema glinfático começa a trabalhar em 2h.'}}
-  if(mode){ban.className='mode-banner '+mode.cls;ban.innerHTML=`<span>${mode.icon}</span><span>${mode.txt}</span>`;ban.style.display='flex'}
-  else{ban.style.display='none'}
+  if(h>=5&&h<9)  mode={cls:'m-morning',icon:'🌅',txt:'Manhã · janela de cortisol activa'}
+  else if(h>=9&&h<12) mode={cls:'m-focus',icon:'🎯',txt:'Foco · pico cognitivo activo'}
+  else if(h>=12&&h<15)mode={cls:'m-dip',icon:'💤',txt:'Pós-almoço · powernap 20min ideal'}
+  else if(h>=15&&h<19)mode={cls:'m-evening',icon:'🌇',txt:'Tarde · janela criativa'}
+  else if(h>=19&&h<22)mode={cls:'m-night',icon:'🌙',txt:'Wind-down · reduz estímulos'}
+  else return (ban.classList.remove('act'),void 0);
+  ban.innerHTML=`<span>${mode.icon}</span><span>${mode.txt}</span>`;
+  ban.className='mode-bar act '+mode.cls;
 }
 
-// ════ MOMENTUM BAR ════
 function updateMomentum(){
   const tk=tkey();
   const items=[S.sleep[tk]?.h>0,( S.water[tk]||0)>=4,S.mood[tk]!==undefined,!!S.journal[tk],(Object.values(S.brainFood[tk]||{}).filter(Boolean).length)>=3];
@@ -4736,7 +4718,7 @@ function expandEntry(date){const text=S.journal?.[date];if(text)openModal('📝 
 function updateGreeting(){
   const h=new Date().getHours();const g=h<5?'Boa madrugada':h<12?'Bom dia':h<18?'Boa tarde':'Boa noite';
   const d=document.getElementById('greetLbl');
-  const today=new Date().toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long'});
+  const today=new Date().toLocaleDateString('pt-BR',{weekday:'short',day:'numeric',month:'short'});
   const wn=S.view<6?'S'+(S.view+1)+'/6':'♾';
   if(d)d.textContent=(S.name?g+', '+S.name:g)+' · '+today;
 }
