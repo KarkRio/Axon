@@ -11,13 +11,13 @@
 <link rel="manifest" href="manifest.json"/>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Fraunces:ital,wght@0,300;0,500;1,300&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
 <style>/* ── HEADER ── */
-.hdr { flex-shrink:0; height:52px; padding:0 12px 0 16px; display:flex; align-items:center; gap:8px; background:rgba(9,14,9,.97); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); border-bottom:1px solid var(--border); overflow:hidden }
-.hdr-brand { flex:1; min-width:0; overflow:hidden }
-.hdr-sub { font-size:10px; color:var(--t3); letter-spacing:.5px; font-family:var(--mono); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; margin-bottom:1px }
-.hdr-app { font-family:var(--mono); font-size:1.05em; font-weight:500; letter-spacing:1px; color:var(--t1) }
+
+.hdr-brand{flex:1;min-width:0;overflow:hidden}
+.hdr-sub{font-size:10px;color:var(--t3);font-family:var(--mono);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;margin-bottom:1px}
+.hdr-app{font-family:var(--mono);font-size:1.05em;font-weight:500;letter-spacing:1px;color:var(--t1);line-height:1}
 .hdr-app em { font-style:normal; color:var(--g) }
-.hdr-btns { display:flex; gap:4px; align-items:center; flex-shrink:0 }
-.hbtn { width:30px; height:30px; border-radius:8px; background:rgba(255,255,255,.04); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:.82em; transition:all .12s; flex-shrink:0 }
+.hdr-btns{display:flex;gap:4px;align-items:center;flex-shrink:0}
+.hbtn{width:30px;height:30px;border-radius:8px;background:rgba(255,255,255,.04);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.82em;transition:all .12s;flex-shrink:0}
 .hbtn:active { background:rgba(61,214,140,.1);border-color:rgba(61,214,140,.3);transform:scale(.9) }
 
 /* ═══════════════════════════════════════════════════════
@@ -71,7 +71,7 @@ body {
 }
 
 /* ─── HEADER ─── */
-.hdr { flex-shrink:0; height:52px; padding:0 12px 0 16px; display:flex; align-items:center; gap:8px; background:rgba(9,14,9,.97); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); border-bottom:1px solid var(--border); overflow:hidden }
+.hdr{flex-shrink:0;height:52px;max-height:52px;padding:0 12px 0 16px;display:flex;align-items:center;gap:8px;background:rgba(9,14,9,.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);overflow:hidden}
 .hdr::after {
   content: '';
   position: absolute;
@@ -79,7 +79,7 @@ body {
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--border-hi) 30%, var(--border-hi) 70%, transparent);
 }
-.hdr-brand { flex:1; min-width:0; overflow:hidden }
+.hdr-brand{flex:1;min-width:0;overflow:hidden}
 .hdr-sup {
   font-size: 10px;
   font-family: var(--mono);
@@ -1415,6 +1415,46 @@ textarea { resize: none; min-height: 88px; line-height: 1.6; font-weight: 300; }
 
 /* Scrollbar */
 ::-webkit-scrollbar { width: 0; height: 0; }
+
+.qa-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:12px}
+.qa{background:var(--raised);border:1px solid var(--border);border-radius:12px;padding:10px 4px;text-align:center;cursor:pointer;transition:all .12s}
+.qa:active{transform:scale(.9);border-color:rgba(61,214,140,.3)}
+.qa.ok{border-color:rgba(61,214,140,.25);background:rgba(61,214,140,.06)}
+.qa-ic{font-size:1.3em;display:block;margin-bottom:3px}
+.qa-lb{font-size:9px;color:var(--t3);font-family:var(--mono)}.qa.ok .qa-lb{color:var(--g)}
+
+.assist{background:rgba(61,214,140,.04);border:1px solid rgba(61,214,140,.1);border-radius:14px;padding:10px 14px;margin-bottom:10px}
+.assist-t{font-family:var(--mono);font-size:9px;color:var(--t3);margin-bottom:7px;letter-spacing:1px;text-transform:uppercase}
+.asi{display:flex;align-items:flex-start;gap:10px}
+.asi-ic{font-size:1.1em;flex-shrink:0;margin-top:1px}
+.asi-body{flex:1;min-width:0}
+.asi-a{font-size:13px;font-weight:500;color:var(--t1);margin-bottom:2px}
+.asi-w{font-size:11px;color:var(--t3);line-height:1.4;font-weight:300}
+.asi-go{background:var(--overlay);border:1px solid var(--border);border-radius:7px;padding:3px 8px;font-size:9px;color:var(--t3);cursor:pointer;white-space:nowrap;flex-shrink:0;font-family:var(--mono)}
+
+.mit-wrap{background:rgba(245,158,11,.04);border:1px solid rgba(245,158,11,.15);border-radius:14px;padding:12px 14px;margin-bottom:10px}
+.mit-done-btn{background:rgba(61,214,140,.08);border:1px solid rgba(61,214,140,.2);color:var(--g);border-radius:8px;padding:4px 10px;font-size:11px;cursor:pointer;font-weight:600;transition:.12s;font-family:var(--mono)}
+.mit-done-btn.on{background:rgba(61,214,140,.2)}
+
+.sec-label{font-size:10px;font-weight:400;letter-spacing:2px;text-transform:uppercase;color:var(--t3);margin-bottom:8px;display:flex;align-items:center;gap:8px;font-family:var(--mono)}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--border)}
+
+.stabs{display:flex;gap:5px;overflow-x:auto;padding-bottom:2px;margin-bottom:10px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.stabs::-webkit-scrollbar{display:none}
+.stab{background:var(--raised);border:1px solid var(--border);color:var(--t3);border-radius:8px;padding:5px 10px;font-size:11px;white-space:nowrap;cursor:pointer;font-family:var(--mono);transition:all .12s;flex-shrink:0}
+.stab.on{background:rgba(61,214,140,.08);border-color:rgba(61,214,140,.25);color:var(--g);font-weight:600}
+.stab:active{transform:scale(.92)}
+.task-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-bottom:12px}
+.task-day{background:var(--raised);border:1px solid var(--border);border-radius:12px;padding:10px;border-top:2px solid transparent}
+.task-day-lbl{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:1px;margin-bottom:6px;text-transform:uppercase;opacity:.5}
+.week-hdr{display:flex;align-items:center;gap:12px;background:var(--raised);border:1px solid var(--border);border-radius:14px;padding:14px;margin-bottom:10px}
+.week-ic{font-size:2em;flex-shrink:0}
+.week-body{flex:1;min-width:0}
+.week-num{font-family:var(--mono);font-size:9px;letter-spacing:2px;color:var(--g);margin-bottom:2px;opacity:.6;text-transform:uppercase}
+.week-title{font-size:14px;font-weight:400;color:var(--t1)}
+.week-btn{background:var(--overlay);border:1px solid var(--border);color:var(--t2);border-radius:8px;padding:5px 9px;font-size:9px;cursor:pointer;white-space:nowrap;flex-shrink:0;font-family:var(--mono)}
+.mrow{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--border)}
+.mrow:last-child{border:none}
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"></head>
 <body>
@@ -2464,7 +2504,7 @@ function renderWeek(){
           style="transition:stroke-dashoffset .5s,stroke .3s;filter:drop-shadow(0 0 6px ${score>=60?'rgba(61,214,140,.3)':'rgba(245,158,11,.3)'})" />
       </svg>
       <div class="bs-num-wrap">
-        <div class="bs-num" id="scoreNum" style="color:${score>=80?'var(--g)':score>=60?'var(--amber)':score>=40?'var(--red)':'var(--t3)'}">${score}</div>
+        <div class="bs-num" style="color:${scoreColor}">${score}</div>
         <div class="bs-label">score</div>
       </div>
     </div>
@@ -2472,7 +2512,7 @@ function renderWeek(){
       <div class="bs-name">${S.name?'Olá, '+S.name:'Axon'}</div>
       <div class="bs-sub">${ptDate()} · ${getTitle(S.level||1)}</div>
       <div class="bs-bar"><div class="bs-bar-fill" id="xpBar" style="width:${((S.xp||0)%200)/200*100}%"></div></div>
-      <div class="bs-xp" id="xpDisp">${(S.xp||0)%200}/200 XP · Nv <span id="levelDisp">${S.level||1}</span></div>
+      <div class="bs-xp" id="xpDisp">${(S.xp||0)%200}/200 XP · Nv <span id="levelDisp">${S.level||1}</div>
     </div>
   </div>`;
 
@@ -2487,7 +2527,7 @@ function renderWeek(){
           <div class="asi-a">${suggestion.action}</div>
           <div class="asi-w">${suggestion.why}</div>
         </div>
-        <button class="asi-go" onclick="${suggestion.go}">${suggestion.goLabel||'→'}</button>
+        <button class="asi-go" onclick="go('${suggestion.tab||'home'}')">→</button>
       </div>
     </div>`;
   }
@@ -2495,7 +2535,7 @@ function renderWeek(){
   // ── MIT ──
   const mit=S.mit?.[tk]||{};
   h+=`<div class="mit-wrap">
-    <div class="mit-label">Tarefa mais importante</div>
+    <div style="font-size:10px;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;font-family:var(--mono);margin-bottom:8px;font-weight:500">MIT</div>
     <div style="display:flex;gap:8px;align-items:center">
       <input id="mitIn" placeholder="O que tornaria hoje bem-sucedido?" value="${mit.task||''}"
         oninput="saveMIT('${tk}',this.value)" style="margin:0;flex:1;${mit.done?'text-decoration:line-through;color:var(--t3)':''}"/>
