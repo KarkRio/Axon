@@ -2277,6 +2277,12 @@ body{background:var(--bg)!important;font-family:var(--font-main)!important}
 }
 .btn:active,.sav:active,.nav-item:active,.game-tile:active{transform:scale(0.97)!important;opacity:0.85!important}
 
+.scroll-tabs{display:flex;gap:5px;overflow-x:auto;padding-bottom:3px;scrollbar-width:none;-webkit-overflow-scrolling:touch;flex-wrap:nowrap}
+.scroll-tabs::-webkit-scrollbar{display:none}
+.scroll-tab{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:7px 12px;font-size:.72em;white-space:nowrap;cursor:pointer;color:var(--t2);flex-shrink:0;font-family:var(--mono);transition:all .15s}
+.scroll-tab.on{background:rgba(61,214,140,.1);border-color:rgba(61,214,140,.3);color:var(--g);font-weight:600}
+.scroll-tab:active{transform:scale(.92)}
+.qa-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:12px}
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"></head>
 <body>
@@ -4132,40 +4138,91 @@ const PROVIDERS={
   custom:{name:'Custom',model:'',url:'',color:'#7a9a7a',badge:'🔧'}
 };
 
-function renderCoach(){const p=S.aiProvider||'anthropic',keys=S.apiKeys||{};
-document.getElementById('ct').innerHTML=`
-<div class="card fu" style="border-left:3px solid ${PROVIDERS[p].color}">
-  <div class="ct2">🤖 COACH IA <span class="info-btn" onclick="openHelp('coachIA')">ⓘ</span> — Selecionar provedor</div>
-  <div class="ibox tip" style="font-size:.7em;margin-bottom:8px">💡 <strong>Groq Cloud</strong> é o mais rápido e gratuito (<1 segundo por resposta). <span class="groq-badge">RECOMENDADO</span></div>
-  <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px">
-    ${Object.entries(PROVIDERS).map(([id,pr])=>`<div class="provider-btn ${p===id?'on':''}" style="${p===id?'border-color:'+pr.color+';color:'+pr.color+';font-weight:600':'color:var(--tx3)'}" onclick="setProvider('${id}')"><div>${pr.name}</div>${pr.badge?`<div style='font-size:9px;opacity:.8;margin-top:1px'>${pr.badge}</div>`:''}</div>`).join('')}
-  </div>
-  <div style="font-size:.7em;color:var(--tx3);margin-bottom:7px">🔑 API Key — <a href="${getKeyUrl(p)}" target="_blank" style="color:var(--ac);text-decoration:none">Obter gratuitamente →</a></div>
-  <div style="display:flex;gap:6px"><input id="apiKeyIn" type="password" placeholder="Cole aqui a tua chave..." value="${keys[p]||''}" style="margin:0;font-size:.8em"/><button class="btn ac" style="padding:7px 10px;font-size:.7em;white-space:nowrap;flex-shrink:0" onclick="saveApiKey()">💾</button></div>
-  \${p==='openrouter'?\`<div style="margin-top:8px"><div style="font-size:.65em;color:var(--t3);margin-bottom:4px">Modelo OpenRouter (opcional)</div><input id="orModelIn" value="\${S.openrouterModel||'openrouter/auto'}" placeholder="openrouter/auto" style="font-size:.75em;margin-bottom:4px"/><div style="font-size:.6em;color:var(--t3);margin-bottom:4px">Modelos grátis: meta-llama/llama-3.1-8b-instruct:free · mistralai/mistral-7b-instruct:free</div><button class="btn" style="font-size:.65em" onclick="S.openrouterModel=document.getElementById('orModelIn')?.value||'openrouter/auto';save();toast('✅ Modelo guardado!')">Guardar modelo</button></div>\`:''}
-  \${p==='custom'?\`<div style="margin-top:8px"><div style="font-size:.65em;color:var(--t3);margin-bottom:4px">URL do endpoint</div><input id="customUrlIn" value="\${S.customUrl||''}" placeholder="https://api.exemplo.com/v1/chat/completions" style="font-size:.75em;margin-bottom:5px"/><div style="font-size:.65em;color:var(--t3);margin-bottom:4px">Modelo</div><input id="customModelIn" value="\${S.customModel||''}" placeholder="gpt-3.5-turbo, llama3..." style="font-size:.75em"/><button class="btn" style="font-size:.65em;margin-top:6px;width:100%" onclick="S.customUrl=document.getElementById('customUrlIn')?.value||'';S.customModel=document.getElementById('customModelIn')?.value||'gpt-3.5-turbo';save();toast('✅ Endpoint guardado!')">💾 Guardar endpoint</button><div style="font-size:.6em;color:var(--t3);margin-top:4px">Funciona com: OpenAI, Ollama, LM Studio, Together AI, qualquer API compatível</div></div>\`:''}
-  ${keys[p]?`<div style="font-size:.65em;color:var(--ac);margin-top:5px">✓ Chave guardada · ${p==='anthropic'?'console.anthropic.com':p==='gemini'?'aistudio.google.com':p==='groq'?'console.groq.com':'platform.openai.com'}</div>`:``}
-</div>
-<div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px">
-  <div class="scroll-tabs" style="margin-bottom:12px">
-  ${Object.entries(AI_MODES).map(([k,m])=>`<button class="scroll-tab ${(S.aiMode||'coach')===k?'on':''}" onclick="setAIMode('${k}')">${m.icon} ${m.name}</button>`).join('')}
-  </div>
-</div>
-<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-bottom:10px">
-  ${(()=>{window._QP=[['📊 Análise semanal','Analisa o meu progresso desta semana. O quê funcionou e o quê não funcionou? Dá-me 3 acções concretas.'],['😴 Sono','Baseado nos meus dados de sono, quais são as mudanças mais impactantes que devo fazer HOJE à noite?'],['💪 Treino','Sou estudante com pouco tempo. Dá-me o treino de calistenia mais eficiente para hoje em 20-30min.'],['📚 Estudo','Estou a estudar para exames. Como organizar as próximas 2 horas para máxima retenção?'],['🧠 Neuroplasticidade','Explica-me como funciona a neuroplasticidade de forma que eu consiga aplicar hoje.'],['🔥 Bloqueio','Estou procrastinando e não consigo começar. O quê acontece no meu cérebro e como saio disso agora?'],['🌊 Flow','Como entro em estado de flow? Dá-me um protocolo específico para a próxima hora.'],['💡 Agora','Com base nos meus dados, o quê é a coisa mais importante que devo fazer nas próximas 2 horas?']];return window._QP.map(([lb],i)=>`<button class="btn" style="font-size:.7em;padding:8px;text-align:left;height:auto;white-space:normal" onclick="if(window._QP)quickAI(window._QP[${i}][1])">${lb}</button>`).join('')})()}
-</div>
-<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
-  <div style="font-size:.62em;color:var(--tx3);font-family:'Share Tech Mono',monospace">${(S.aiHistory||[]).length} mensagens</div>
-  <div style="display:flex;gap:5px">
-    <button class="btn" style="font-size:.62em;padding:4px 9px;color:var(--tx3)" onclick="toggleChatHistory()">${S.chatCollapsed?'↓ Mostrar':'↑ Ocultar'} chat</button>
-    <button class="btn red" style="font-size:.62em;padding:4px 9px" onclick="clearAIChat()">🗑 Limpar</button>
-  </div>
-</div>
-<div id="chatBox" style="min-height:${S.chatCollapsed?'0':'80px'};max-height:${S.chatCollapsed?'0':'340px'};overflow:hidden;margin-bottom:${S.chatCollapsed?'0':'10px'};display:flex;flex-direction:column;gap:8px;transition:all .3s">${S.chatCollapsed?'':renderChat()}</div>
-<div style="display:flex;gap:6px"><textarea id="aiIn" placeholder="Faz uma pergunta ao Coach..." style="flex:1;margin:0;min-height:42px;font-size:.82em;resize:none;border-radius:12px" rows="2" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendAI()}"></textarea><button id="aiBtn" class="btn ac" style="padding:9px 12px;align-self:flex-end;font-size:.8em" onclick="sendAI()">↑</button></div>
-<div id="aiInsights" style="margin-top:10px">${renderInsights()}</div>`;
-requestAnimationFrame(()=>{const cb=document.getElementById('chatBox');if(cb)cb.scrollTop=cb.scrollHeight})}
+function renderCoach(){
+  const p=S.aiProvider||'groq',keys=S.apiKeys||{};
+  const ct=document.getElementById('ct');if(!ct)return;
+  const curMode=S.aiMode||'coach';
+  const modes=typeof AI_MODES!=='undefined'?AI_MODES:{};
+  const PROV=PROVIDERS||{};
 
+  let provBtns=Object.entries(PROV).map(([id,pr])=>{
+    const isOn=p===id;
+    return `<div class="provider-btn${isOn?' on':''}" style="${isOn?'border-color:'+pr.color+';color:'+pr.color+';font-weight:700':'color:var(--t3)'}" onclick="setProvider('${id}')">
+      <div>${pr.name}</div>
+      ${pr.badge?`<div style="font-size:9px;opacity:.8;margin-top:1px">${pr.badge}</div>`:''}
+    </div>`;
+  }).join('');
+
+  let extraProvFields='';
+  if(p==='openrouter'){
+    extraProvFields=`<div style="margin-top:10px;background:rgba(167,139,250,.06);border:1px solid rgba(167,139,250,.15);border-radius:12px;padding:12px">
+      <div style="font-size:.65em;color:var(--t3);margin-bottom:6px;letter-spacing:1px;text-transform:uppercase">Modelo OpenRouter</div>
+      <input id="orModelIn" value="${S.openrouterModel||'openrouter/auto'}" placeholder="openrouter/auto" style="font-size:.8em;margin-bottom:6px"/>
+      <div style="font-size:.6em;color:var(--t3);line-height:1.6;margin-bottom:8px">Modelos 100% gratuitos:<br>· meta-llama/llama-3.1-8b-instruct:free<br>· mistralai/mistral-7b-instruct:free<br>· openrouter/auto (escolhe o melhor disponível)</div>
+      <button class="btn" style="font-size:.68em" onclick="S.openrouterModel=document.getElementById('orModelIn')?.value||'openrouter/auto';save();toast('✅ Modelo guardado!')">Guardar modelo</button>
+    </div>`;
+  }else if(p==='custom'){
+    extraProvFields=`<div style="margin-top:10px;background:rgba(122,154,122,.06);border:1px solid rgba(122,154,122,.15);border-radius:12px;padding:12px">
+      <div style="font-size:.65em;color:var(--t3);margin-bottom:6px;letter-spacing:1px;text-transform:uppercase">Endpoint personalizado</div>
+      <div style="font-size:.65em;color:var(--t3);margin-bottom:4px">URL</div>
+      <input id="customUrlIn" value="${S.customUrl||''}" placeholder="https://api.exemplo.com/v1/chat/completions" style="font-size:.78em;margin-bottom:8px"/>
+      <div style="font-size:.65em;color:var(--t3);margin-bottom:4px">Modelo</div>
+      <input id="customModelIn" value="${S.customModel||''}" placeholder="gpt-3.5-turbo, llama3, gemma..." style="font-size:.78em"/>
+      <button class="btn" style="font-size:.68em;width:100%;margin-top:8px" onclick="S.customUrl=document.getElementById('customUrlIn')?.value||'';S.customModel=document.getElementById('customModelIn')?.value||'gpt-3.5-turbo';save();toast('✅ Endpoint guardado!')">💾 Guardar endpoint</button>
+      <div style="font-size:.6em;color:var(--t3);margin-top:6px;line-height:1.5">Compatível com qualquer API no formato OpenAI:<br>Ollama · LM Studio · Together AI · Mistral · etc.</div>
+    </div>`;
+  }
+
+  let modeBtns=Object.entries(modes).map(([k,m])=>
+    `<button class="scroll-tab${curMode===k?' on':''}" onclick="setAIMode('${k}')">${m.icon} ${m.name}</button>`
+  ).join('');
+
+  let quickBtns='';
+  if(window._QP&&window._QP.length){
+    quickBtns=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:12px">${window._QP.map(([lb],i)=>`<button class="btn" style="font-size:.72em;padding:9px;text-align:left;height:auto;white-space:normal;line-height:1.4" onclick="if(window._QP)quickAI(window._QP[${i}][1])">${lb}</button>`).join('')}</div>`;
+  }
+
+  const msgCount=(S.aiHistory||[]).length;
+  
+  ct.innerHTML=`
+<div class="card">
+  <div style="font-size:.65em;letter-spacing:2px;color:var(--g);text-transform:uppercase;font-weight:600;margin-bottom:10px;opacity:.7">Coach IA</div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:10px">${provBtns}</div>
+  ${extraProvFields}
+  <div style="display:flex;align-items:center;gap:8px;margin-top:10px">
+    <div style="font-size:.7em;color:var(--t3)">🔑 API Key —</div>
+    <a href="${getKeyUrl(p)}" target="_blank" style="font-size:.7em;color:var(--g);text-decoration:none">Obter gratuitamente →</a>
+  </div>
+  <div style="display:flex;gap:6px;margin-top:6px">
+    <input id="apiKeyIn" type="password" placeholder="Cole aqui a tua chave..." value="${keys[p]||''}" style="margin:0;font-size:.82em"/>
+    <button class="btn ac" style="padding:8px 12px;font-size:.75em;white-space:nowrap;flex-shrink:0" onclick="saveApiKey()">💾</button>
+  </div>
+  ${keys[p]?`<div style="font-size:.65em;color:var(--g);margin-top:5px;font-family:var(--mono)">✓ Chave guardada</div>`:''}
+</div>
+
+<div style="margin-bottom:10px">
+  <div class="scroll-tabs">${modeBtns}</div>
+</div>
+
+${(()=>{window._QP=[['📊 Análise semanal','Analisa o meu progresso desta semana. O quê funcionou, o quê não funcionou? Dá-me 3 acções concretas.'],['😴 Sono','Baseado nos meus dados de sono, quais são as mudanças mais impactantes que devo fazer HOJE à noite?'],['💪 Treino','Sou estudante com pouco tempo. Dá-me o treino mais eficiente para hoje em 30min.'],['📚 Estudo','Estou a estudar para exames. Como organizar as próximas 2 horas para máxima retenção?'],['🧠 Neuroplasticidade','Explica neuroplasticidade de forma que eu consiga aplicar hoje.'],['🔥 Bloqueio','Estou procrastinando. O quê acontece no meu cérebro e como saio disso agora?'],['🌊 Flow','Como entro em flow? Dá-me um protocolo para a próxima hora.'],['💡 Agora','Com base nos meus dados, o quê é mais importante fazer nas próximas 2 horas?']];return window._QP.map(([lb],i)=>`<button class="btn" style="font-size:.72em;padding:9px;text-align:left;height:auto;white-space:normal;line-height:1.4" onclick="if(window._QP)quickAI(window._QP[${i}][1])">${lb}</button>`).join('')})()}
+
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+  <div style="font-size:.65em;color:var(--t3);font-family:var(--mono)">${msgCount} mensagens</div>
+  <div style="display:flex;gap:5px">
+    <button class="btn" style="font-size:.65em;padding:4px 9px" onclick="toggleChatHistory()">${S.chatCollapsed?'↓ Mostrar':'↑ Ocultar'} chat</button>
+    <button class="btn" style="font-size:.65em;padding:4px 9px;color:var(--red);border-color:rgba(239,68,68,.25)" onclick="clearAIChat()">🗑 Limpar</button>
+  </div>
+</div>
+<div id="chatBox" style="max-height:${S.chatCollapsed?'0':'340px'};overflow-y:${S.chatCollapsed?'hidden':'auto'};margin-bottom:${S.chatCollapsed?'0':'10px'};display:flex;flex-direction:column;gap:8px;transition:max-height .3s">${S.chatCollapsed?'':renderChat()}</div>
+
+<div style="display:flex;gap:7px;align-items:flex-end">
+  <textarea id="aiIn" placeholder="Faz uma pergunta ao Coach..." style="flex:1;margin:0;min-height:44px;font-size:.85em;resize:none;border-radius:12px;line-height:1.5" rows="2" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendAI()}"></textarea>
+  <button id="aiBtn" class="btn ac" style="width:44px;height:44px;padding:0;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.1em;flex-shrink:0" onclick="sendAI()">↑</button>
+</div>
+<div id="aiInsights" style="margin-top:10px">${renderInsights()}</div>`;
+
+  requestAnimationFrame(()=>{const cb=document.getElementById('chatBox');if(cb)cb.scrollTop=cb.scrollHeight});
+}
 function getKeyUrl(p){return{anthropic:'https://console.anthropic.com',gemini:'https://aistudio.google.com/app/apikey',openai:'https://platform.openai.com/api-keys',groq:'https://console.groq.com/keys',openrouter:'https://openrouter.ai/keys',custom:'#'}[p]||'#'}
 function setAIMode(k){S.aiMode=k;save();renderCoach();toast(AI_MODES[k]?.icon+' Modo: '+AI_MODES[k]?.name)}
 function setProvider(id){S.aiProvider=id;save();renderCoach();toast('Provider: '+PROVIDERS[id].name)}
