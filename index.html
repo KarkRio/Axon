@@ -2799,43 +2799,47 @@ const WMISSION_POOL=[
 ];
 
 const DEF_WO={
-Seg:{focus:"EMPURRAR + PLANCHE BASE + CORE",exercises:[
-  {name:"Pseudo Planche Push-up (inclinado à frente)",sets:3,reps:"6-8",unit:"rep",restSec:90,note:"Dedos apontados para trás, peso à frente dos pulsos. Controle total."},
-  {name:"Flexões lentas (3s descida)",sets:3,reps:"8-12",unit:"rep",restSec:75,note:"3 segundos a descer, 1 segundo em cima. Tensão constante."},
-  {name:"Planche lean (inclinar à frente)",sets:3,reps:"20",unit:"seg",isTimer:true,timerSec:20,restSec:60,note:"Mãos no chão, empurra o chão e inclina o corpo. Cotovelos bloqueados."},
-  {name:"Hollow body hold",sets:3,reps:"30",unit:"seg",isTimer:true,timerSec:30,restSec:45,note:"Costas planas no chão, lombar colada, pernas 30° do chão. Sente o core a 'fechar'."}
+Seg:{focus:"Push + Core + Skill",exercises:[
+  {name:"Pseudo Planche Push-up",sets:3,reps:"6-8",unit:"rep",restSec:90,note:"Dedos apontados para trás, peso à frente dos pulsos. Cotovelos roçam costelas."},
+  {name:"Flexões lentas (3s descida)",sets:3,reps:"8-12",unit:"rep",restSec:75,note:"3s descer, pausa 1s, sobe controlado. Sente peito, não ombros."},
+  {name:"Pike Push-up",sets:3,reps:"6-10",unit:"rep",restSec:75,note:"Anca elevada em V invertido. Cabeça vai em direcção ao chão. Foca ombros."},
+  {name:"Dragon flag (negativa)",sets:3,reps:"3-5",unit:"rep",restSec:120,note:"Desce LENTO 4s. Subida pode ser assistida. Lombar nunca toca."},
+  {name:"Hollow body hold",sets:3,reps:"30",unit:"seg",isTimer:true,timerSec:30,restSec:45,note:"Costas planas, lombar colada. Pernas a 30°. Braços junto à cabeça."},
+  {name:"Planche lean",sets:3,reps:"20",unit:"seg",isTimer:true,timerSec:20,restSec:60,note:"Inclina corpo à frente em suporte. Cotovelos bloqueados."}
 ]},
-Ter:{focus:"CORE PESADO + CONTROLE",exercises:[
-  {name:"Dragon flag (negativa)",sets:3,reps:"3-5",unit:"rep",restSec:120,note:"Agarra a base, corpo recto. Desce LENTO 3-4 segundos. A subida pode ser auxiliada."},
-  {name:"Reverse crunch lento",sets:3,reps:"10-15",unit:"rep",restSec:60,note:"Costas no chão. Levanta os joelhos ao peito, eleva o quadril, desce controlado."},
-  {name:"Prancha com toque no ombro",sets:3,reps:"20",unit:"toques",restSec:60,note:"Em prancha alta. Toca o ombro oposto mantendo o quadril estável — sem balançar."},
-  {name:"Hollow hold leve",sets:2,reps:"20",unit:"seg",isTimer:true,timerSec:20,restSec:30,note:"Recuperação ativa. Ativa core sem esforço máximo."}
+Ter:{focus:"Recuperação Activa",exercises:[
+  {name:"Alongamento ombro e peito",sets:1,reps:"2",unit:"min",isTimer:true,timerSec:120,restSec:0,note:"30s cada posição. Braço cruzado ao peito, depois mãos atrás entrelaçadas."},
+  {name:"Alongamento isquiotibiais",sets:1,reps:"90",unit:"seg",isTimer:true,timerSec:90,restSec:0,note:"Perna estendida, inclina tronco à frente. Mantém posição."},
+  {name:"Respiração diafragmática",sets:1,reps:"3",unit:"min",isTimer:true,timerSec:180,restSec:0,note:"Inspira 4s, retém 4s, expira 6s. Relaxa os punhos."},
+  {name:"Mobilidade punhos",sets:2,reps:"60",unit:"seg",isTimer:true,timerSec:60,restSec:30,note:"Círculos, extensões, flexões. Fundamental para planche."}
 ]},
-Qua:{focus:"PERNAS — BASE DE FORÇA",exercises:[
-  {name:"Agachamento lento (3s descida)",sets:4,reps:"12-15",unit:"rep",restSec:75,note:"3 segundos a descer, coxa paralela ao chão. Joelhos sobre os pés. Postura perfeita."},
-  {name:"Afundos (lunges)",sets:3,reps:"10 cada",unit:"rep",restSec:60,note:"Passo largo, joelho traseiro quase no chão. Costas rectas. Alternados."},
-  {name:"Wall sit",sets:3,reps:"45",unit:"seg",isTimer:true,timerSec:45,restSec:60,note:"90° nas pernas. Costas planas na parede. Respira devagar. Não aguentas? Aumenta o ângulo."},
-  {name:"Elevação de gémeos",sets:3,reps:"20",unit:"rep",restSec:45,note:"Sobe devagar, segura 1s em cima, desce devagar. Podes usar degrau para amplitude total."}
+Qua:{focus:"Core Pesado + Pernas",exercises:[
+  {name:"Reverse crunch lento",sets:3,reps:"10-15",unit:"rep",restSec:60,note:"Joelhos ao peito, eleva quadril, desce controlado. Sem impulso."},
+  {name:"Prancha com toque no ombro",sets:3,reps:"20",unit:"toques",restSec:60,note:"Quadril estável — não balança. Toca ombro oposto alternado."},
+  {name:"Agachamento lento (3s)",sets:4,reps:"12-15",unit:"rep",restSec:75,note:"3s descer, coxa paralela. Joelhos sobre os pés. Peito alto."},
+  {name:"Afundos (lunges)",sets:3,reps:"10 cada",unit:"rep",restSec:60,note:"Passo largo, joelho traseiro quase no chão. Sobe controlado."},
+  {name:"Wall sit",sets:3,reps:"45",unit:"seg",isTimer:true,timerSec:45,restSec:60,note:"90° nas pernas. Costas na parede. Sem apoio nas mãos."}
 ]},
-Qui:{focus:"MOBILIDADE + CORE LEVE",exercises:[
-  {name:"Alongamento ombro e peito",sets:1,reps:"2",unit:"min",isTimer:true,timerSec:120,restSec:0,note:"Braço cruzado ao peito (ombro). Depois mãos atrás entrelaçadas, abre o peito."},
-  {name:"Alongamento pernas completo",sets:1,reps:"2",unit:"min",isTimer:true,timerSec:120,restSec:0,note:"Isquiotibiais, quadriceps, panturrilha. 30-40s cada posição."},
-  {name:"Prancha leve",sets:2,reps:"25",unit:"seg",isTimer:true,timerSec:25,restSec:30,note:"Sem esforço máximo. Só ativar o core e manter posição."},
-  {name:"Movimento livre (caminhada ou dança)",sets:1,reps:"8",unit:"min",isTimer:true,timerSec:480,restSec:0,note:"Sem objectivo. Só mexe o corpo de forma prazerosa."}
+Qui:{focus:"Skill + Controle",exercises:[
+  {name:"Tuck planche tentativas",sets:3,reps:"15",unit:"seg",isTimer:true,timerSec:15,restSec:75,note:"Joelhos ao peito, costas redondas, eleva quadris. Empurra chão."},
+  {name:"Handstand na parede",sets:2,reps:"30",unit:"seg",isTimer:true,timerSec:30,restSec:90,note:"Kick-up. Empurra activamente para cima. Corpo em linha recta."},
+  {name:"Tentativas handstand livre",sets:1,reps:"90",unit:"seg",isTimer:true,timerSec:90,restSec:0,note:"Procura o ponto de equilíbrio. Não é sobre aguentar."},
+  {name:"Elevação de gémeos",sets:3,reps:"20",unit:"rep",restSec:45,note:"Sobe devagar, segura 1s, desce devagar. Degrau para amplitude total."}
 ]},
-Sex:{focus:"FORÇA TOTAL — MISTO",exercises:[
-  {name:"Flexões explosivas",sets:3,reps:"6-10",unit:"rep",restSec:90,note:"Sobe RÁPIDO (quase saltar), desce controlado 2s. Potência + controle."},
-  {name:"Tuck planche no chão",sets:3,reps:"15",unit:"seg",isTimer:true,timerSec:15,restSec:75,note:"Em suporte nas mãos, joelhos ao peito, costas redondas, eleva os quadris. Empurra o chão."},
-  {name:"Mountain climbers",sets:3,reps:"20",unit:"rep",restSec:45,note:"Ritmo controlado, não rápido demais. Core activo durante todo o movimento."},
-  {name:"Prancha forte (máxima tensão)",sets:3,reps:"35",unit:"seg",isTimer:true,timerSec:35,restSec:60,note:"Aperta glúteos, pressiona calcanhar para trás, rosca o umbigo para dentro. Tudo contrai."}
+Sex:{focus:"Força Total + Anti-Tremor",exercises:[
+  {name:"Flexões explosivas",sets:3,reps:"6-10",unit:"rep",restSec:90,note:"Sobe RÁPIDO (tenta bater palmas), desce controlado 2s."},
+  {name:"Mountain climbers",sets:3,reps:"20",unit:"rep",restSec:45,note:"Ritmo controlado, core activo. Não deixa quadril subir."},
+  {name:"Prancha forte (anti-tremor)",sets:2,reps:"35",unit:"seg",isTimer:true,timerSec:35,restSec:60,note:"Aperta glúteos, pressiona calcanhar, rosca o umbigo. Suprime o tremor."},
+  {name:"Topo da flexão (isometria)",sets:2,reps:"25",unit:"seg",isTimer:true,timerSec:25,restSec:45,note:"Push-up alto. Cotovelos firmes, sente estabilidade do ombro."},
+  {name:"Hollow hold final",sets:2,reps:"25",unit:"seg",isTimer:true,timerSec:25,restSec:30,note:"Fechar o treino com o padrão fundamental."}
 ]},
-Sáb:{focus:"CONTROLE E TÉCNICA",exercises:[
-  {name:"Flexões lentas — técnica pura",sets:2,reps:"6",unit:"rep",restSec:90,note:"3s descer, 2s subir. Sem cheating. Sentir cada músculo."},
-  {name:"Hollow hold",sets:2,reps:"20",unit:"seg",isTimer:true,timerSec:20,restSec:45,note:"Consolidar o padrão de movimento. Não é desafio — é prática."},
-  {name:"Agachamento leve",sets:2,reps:"10",unit:"rep",restSec:45,note:"Foco na postura, amplitude total, respiração."},
-  {name:"Respiração diafragmática",sets:1,reps:"3",unit:"min",isTimer:true,timerSec:180,restSec:0,note:"Inspira pelo nariz 4s, retém 4s, expira pela boca 6s. Activa o parassimpático."}
+Sáb:{focus:"Técnica Pura + Skill",exercises:[
+  {name:"Flexões lentas — técnica",sets:2,reps:"6",unit:"rep",restSec:90,note:"3s descer, 2s subir. Forma perfeita. Cada rep com intenção."},
+  {name:"Planche lean — qualidade",sets:3,reps:"20",unit:"seg",isTimer:true,timerSec:20,restSec:60,note:"Não é esforço — é qualidade. Posição perfeita."},
+  {name:"Hollow hold — qualidade",sets:2,reps:"20",unit:"seg",isTimer:true,timerSec:20,restSec:45,note:"Consolida o padrão. Prática deliberada."},
+  {name:"Respiração diafragmática",sets:1,reps:"3",unit:"min",isTimer:true,timerSec:180,restSec:0,note:"Inspira 4s, retém 4s, expira 6s. Recuperação completa."}
 ]},
-Dom:{focus:"DESCANSO TOTAL — RECUPERAÇÃO OBRIGATÓRIA",exercises:[]}
+Dom:{focus:"Descanso Total — Recuperação Obrigatória",exercises:[]}
 };
 
 const DEF_SCH={
@@ -2904,7 +2908,7 @@ D('powernapCount',0);D('nsdrCount',0);D('soundTimers',{});D('soundPreset',null);
 D('compoundDays',0);D('dailyBoss',null);D('dailyBossDate',null);
 D('reportCard',{});D('brainForecast',null);D('lastForecastDate',null);
 // NEW STATE
-D('aiProvider','anthropic');D('apiKeys',{anthropic:'',gemini:'',openai:''});
+D('aiProvider','groq');D('openrouterModel','openrouter/auto');D('customUrl','');D('customModel','gpt-3.5-turbo');D('apiKeys',{anthropic:'',gemini:'',openai:''});
 D('focusTasks',[]);D('focusNotes','');D('energy',{});D('goals_data',[]);
 D('bodyMetrics',{});D('moodNotes',{});D('weeklyGoal','');D('readPages',{});
 D('studySubjects',{});D('challenges_custom',[]);D('pomSessions',{});
@@ -4120,10 +4124,12 @@ const AI_MODES={
 };
 
 const PROVIDERS={
-  anthropic:{name:'Anthropic Claude',model:'claude-sonnet-4-20250514',url:'https://api.anthropic.com/v1/messages',color:'#d4a853'},
-  gemini:{name:'Google Gemini',model:'gemini-2.0-flash',url:'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent',color:'var(--accent)'},
-  openai:{name:'OpenAI GPT-4',model:'gpt-4o-mini',url:'https://api.openai.com/v1/chat/completions',color:'#5B8DEF'},
-  groq:{name:'Groq Cloud',model:'llama-3.3-70b-versatile',url:'https://api.groq.com/openai/v1/chat/completions',color:'#FF6B35'}
+  anthropic:{name:'Anthropic',model:'claude-sonnet-4-20250514',url:'https://api.anthropic.com/v1/messages',color:'#d4a853',badge:''},
+  gemini:{name:'Gemini',model:'gemini-2.0-flash',url:'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent',color:'#4FC3A1',badge:''},
+  openai:{name:'OpenAI',model:'gpt-4o-mini',url:'https://api.openai.com/v1/chat/completions',color:'#60a5fa',badge:''},
+  groq:{name:'Groq',model:'llama-3.3-70b-versatile',url:'https://api.groq.com/openai/v1/chat/completions',color:'#FF6B35',badge:'⚡ GRÁTIS'},
+  openrouter:{name:'OpenRouter',model:'openrouter/auto',url:'https://openrouter.ai/api/v1/chat/completions',color:'#a78bfa',badge:'🌐 GRÁTIS'},
+  custom:{name:'Custom',model:'',url:'',color:'#7a9a7a',badge:'🔧'}
 };
 
 function renderCoach(){const p=S.aiProvider||'anthropic',keys=S.apiKeys||{};
@@ -4132,10 +4138,12 @@ document.getElementById('ct').innerHTML=`
   <div class="ct2">🤖 COACH IA <span class="info-btn" onclick="openHelp('coachIA')">ⓘ</span> — Selecionar provedor</div>
   <div class="ibox tip" style="font-size:.7em;margin-bottom:8px">💡 <strong>Groq Cloud</strong> é o mais rápido e gratuito (<1 segundo por resposta). <span class="groq-badge">RECOMENDADO</span></div>
   <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px">
-    ${Object.entries(PROVIDERS).map(([id,pr])=>`<div class="provider-btn ${p===id?'on':''}" style="${p===id?'border-color:'+pr.color+';color:'+pr.color+';font-weight:600':'color:var(--tx3)'}" onclick="setProvider('${id}')">${pr.name.split(' ')[0]}${id==='groq'?'<span style="font-size:.7em;opacity:.8"> ⚡</span>':''}</div>`).join('')}
+    ${Object.entries(PROVIDERS).map(([id,pr])=>`<div class="provider-btn ${p===id?'on':''}" style="${p===id?'border-color:'+pr.color+';color:'+pr.color+';font-weight:600':'color:var(--tx3)'}" onclick="setProvider('${id}')"><div>${pr.name}</div>${pr.badge?`<div style='font-size:9px;opacity:.8;margin-top:1px'>${pr.badge}</div>`:''}</div>`).join('')}
   </div>
   <div style="font-size:.7em;color:var(--tx3);margin-bottom:7px">🔑 API Key — <a href="${getKeyUrl(p)}" target="_blank" style="color:var(--ac);text-decoration:none">Obter gratuitamente →</a></div>
   <div style="display:flex;gap:6px"><input id="apiKeyIn" type="password" placeholder="Cole aqui a tua chave..." value="${keys[p]||''}" style="margin:0;font-size:.8em"/><button class="btn ac" style="padding:7px 10px;font-size:.7em;white-space:nowrap;flex-shrink:0" onclick="saveApiKey()">💾</button></div>
+  \${p==='openrouter'?\`<div style="margin-top:8px"><div style="font-size:.65em;color:var(--t3);margin-bottom:4px">Modelo OpenRouter (opcional)</div><input id="orModelIn" value="\${S.openrouterModel||'openrouter/auto'}" placeholder="openrouter/auto" style="font-size:.75em;margin-bottom:4px"/><div style="font-size:.6em;color:var(--t3);margin-bottom:4px">Modelos grátis: meta-llama/llama-3.1-8b-instruct:free · mistralai/mistral-7b-instruct:free</div><button class="btn" style="font-size:.65em" onclick="S.openrouterModel=document.getElementById('orModelIn')?.value||'openrouter/auto';save();toast('✅ Modelo guardado!')">Guardar modelo</button></div>\`:''}
+  \${p==='custom'?\`<div style="margin-top:8px"><div style="font-size:.65em;color:var(--t3);margin-bottom:4px">URL do endpoint</div><input id="customUrlIn" value="\${S.customUrl||''}" placeholder="https://api.exemplo.com/v1/chat/completions" style="font-size:.75em;margin-bottom:5px"/><div style="font-size:.65em;color:var(--t3);margin-bottom:4px">Modelo</div><input id="customModelIn" value="\${S.customModel||''}" placeholder="gpt-3.5-turbo, llama3..." style="font-size:.75em"/><button class="btn" style="font-size:.65em;margin-top:6px;width:100%" onclick="S.customUrl=document.getElementById('customUrlIn')?.value||'';S.customModel=document.getElementById('customModelIn')?.value||'gpt-3.5-turbo';save();toast('✅ Endpoint guardado!')">💾 Guardar endpoint</button><div style="font-size:.6em;color:var(--t3);margin-top:4px">Funciona com: OpenAI, Ollama, LM Studio, Together AI, qualquer API compatível</div></div>\`:''}
   ${keys[p]?`<div style="font-size:.65em;color:var(--ac);margin-top:5px">✓ Chave guardada · ${p==='anthropic'?'console.anthropic.com':p==='gemini'?'aistudio.google.com':p==='groq'?'console.groq.com':'platform.openai.com'}</div>`:``}
 </div>
 <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px">
@@ -4158,7 +4166,7 @@ document.getElementById('ct').innerHTML=`
 <div id="aiInsights" style="margin-top:10px">${renderInsights()}</div>`;
 requestAnimationFrame(()=>{const cb=document.getElementById('chatBox');if(cb)cb.scrollTop=cb.scrollHeight})}
 
-function getKeyUrl(p){return{anthropic:'https://console.anthropic.com',gemini:'https://aistudio.google.com/app/apikey',openai:'https://platform.openai.com/api-keys',groq:'https://console.groq.com/keys'}[p]||'#'}
+function getKeyUrl(p){return{anthropic:'https://console.anthropic.com',gemini:'https://aistudio.google.com/app/apikey',openai:'https://platform.openai.com/api-keys',groq:'https://console.groq.com/keys',openrouter:'https://openrouter.ai/keys',custom:'#'}[p]||'#'}
 function setAIMode(k){S.aiMode=k;save();renderCoach();toast(AI_MODES[k]?.icon+' Modo: '+AI_MODES[k]?.name)}
 function setProvider(id){S.aiProvider=id;save();renderCoach();toast('Provider: '+PROVIDERS[id].name)}
 function saveApiKey(){const k=document.getElementById('apiKeyIn')?.value?.trim();if(!k){toast('⚠️ Cola a chave!');return}S.apiKeys=S.apiKeys||{};S.apiKeys[S.aiProvider||'anthropic']=k;save();renderCoach();toast('✅ Chave guardada!')}
@@ -4194,7 +4202,24 @@ if(p==='anthropic'){
   const resp=await fetch(PROVIDERS.openai.url,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+key},body:JSON.stringify({model:PROVIDERS.openai.model,max_tokens:600,messages:[{role:'system',content:getSysPr()},...S.aiHistory.map(m=>({role:m.role,content:m.content}))]})});const d=await resp.json();if(d.error)throw new Error(d.error.message);reply=d.choices?.[0]?.message?.content||'Sem resposta.'
 }else if(p==='groq'){
   const resp=await fetch(PROVIDERS.groq.url,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+key},body:JSON.stringify({model:PROVIDERS.groq.model,max_tokens:600,messages:[{role:'system',content:getSysPr()},...S.aiHistory.map(m=>({role:m.role,content:m.content}))]})});const d=await resp.json();if(d.error)throw new Error(d.error.message||JSON.stringify(d.error));reply=d.choices?.[0]?.message?.content||'Sem resposta.'
-}
+}else if(p==='openrouter'){
+    const orModel=S.openrouterModel||'openrouter/auto';
+    const resp=await fetch('https://openrouter.ai/api/v1/chat/completions',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+key,'HTTP-Referer':'https://axon.app','X-Title':'Axon Neural Habits'},
+      body:JSON.stringify({model:orModel,max_tokens:600,messages:[{role:'system',content:getSysPr()},...S.aiHistory.map(m=>({role:m.role,content:m.content}))]})
+    });
+    const d=await resp.json();
+    if(d.error)throw new Error(d.error.message||JSON.stringify(d.error));
+    reply=d.choices?.[0]?.message?.content||'Sem resposta.';
+  }else if(p==='custom'){
+    const customUrl=S.customUrl||'';const customModel=S.customModel||'gpt-3.5-turbo';
+    if(!customUrl)throw new Error('URL do endpoint não definida nas configurações do Coach.');
+    const resp=await fetch(customUrl,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+key},body:JSON.stringify({model:customModel,max_tokens:600,messages:[{role:'system',content:getSysPr()},...S.aiHistory.map(m=>({role:m.role,content:m.content}))]})});
+    const d=await resp.json();
+    if(d.error)throw new Error(d.error.message||JSON.stringify(d.error));
+    reply=d.choices?.[0]?.message?.content||'Sem resposta.';
+  }
 S.aiHistory.push({role:'assistant',content:reply});S.aiChats=(S.aiChats||0)+1;save();checkAch();addXP(5);
 // Extract memory facts from reply
 if(reply.includes('**')){const facts=reply.match(/\*\*([^*]{5,60})\*\*/g)?.slice(0,2)||[];facts.forEach(f=>{const fact=f.replace(/\*/g,'');if(!S.aiMemory.some(m=>m.fact===fact)){S.aiMemory.push({fact,date:tkey()});if(S.aiMemory.length>20)S.aiMemory.shift();save()}})}
