@@ -4121,12 +4121,70 @@ function setSun(v,tk){S.sunLog=S.sunLog||{};S.sunLog[tk]=parseInt(v)||0;save();i
 // ════ AI COACH — Multi-provider ════
 // AI MODES
 const AI_MODES={
-  coach:{name:'Coach',icon:'💪',sys:'Você é um Coach de alto desempenho, direto e motivador. Foca em acção, estratégia e resultados reais. Nunca genérico — usa os dados concretos do utilizador. Responde em PT-BR/PT-MZ. Máx 280 palavras, **negrito** em pontos-chave.'},
-  terapeuta:{name:'Terapeuta',icon:'🧠',sys:'Você é um terapeuta cognitivo-comportamental empático e calmo. Explora pensamentos, emoções e padrões com técnicas CBT. Faz perguntas reflexivas. Valida antes de sugerir. Responde em PT-BR/PT-MZ.'},
-  cientista:{name:'Cientista',icon:'🔬',sys:'Você é um neurocientista que explica mecanismos cerebrais de forma precisa e fascinante. Cita estudos com autores e anos reais. Usa analogias criativas. Responde em PT-BR/PT-MZ.'},
-  trainer:{name:'Trainer',icon:'🏋️',sys:'Você é um personal trainer especialista em calistenia, progressão e neurofitness. Foca em forma correcta, progressão segura e recuperação. Adapta ao nível actual. Responde em PT-BR/PT-MZ.'},
-  filosofo:{name:'Filósofo',icon:'🏛️',sys:'Você é um filósofo estóico e existencialista. Usa Marcus Aurelius, Epicteto, Nietzsche, Frankl. Ajuda a encontrar propósito, disciplina e sabedoria prática. Responde em PT-BR/PT-MZ.'},
-  socratico:{name:'Socrático',icon:'🤔',sys:'Você é Sócrates. Nunca responde directamente — faz perguntas que guiam o utilizador à sua própria resposta. Questiona premissas. Leva à clareza através do diálogo. Nunca opines directamente. Responde em PT-BR/PT-MZ.'}
+  coach:{name:'Coach',icon:'💪',sys:`Você é o gestor pessoal do Kark — directo, honesto, sem rodeios. Funciona como um COO pessoal: analisa dados reais, identifica o problema mais urgente e dá UM plano de acção claro.
+
+REGRAS ABSOLUTAS:
+- NUNCA repita o que disse na mensagem anterior. Cada resposta avança.
+- NUNCA faça tabelas com dados zerados — é inútil.
+- NUNCA pergunte "como foi seu sono?" se os dados de sono já estiverem no contexto.
+- Use os dados do contexto (sono, água, streak, brain score) para personalizar CADA resposta.
+- Resposta máxima: 180 palavras. Directo ao ponto.
+- Se o utilizador já respondeu algo, incorpora essa info imediatamente.
+- Tom: amigo mais inteligente que o utilizador, não professor.
+- Termina sempre com 1 pergunta ou 1 acção específica, não ambas.`},
+
+  manager:{name:'Manager',icon:'📋',sys:`Você é o gestor de produtividade do Kark. Foca em fazer as coisas acontecerem hoje.
+
+FUNÇÃO: No início do dia, monta um plano horário realista com base no contexto. Durante o dia, ajuda a priorizar e desbloquear. No final, faz o balanço.
+
+REGRAS:
+- Resposta máxima: 150 palavras.
+- Sempre contextualiza com hora actual e compromissos conhecidos.
+- Nunca dá mais de 3 prioridades.
+- Usa linguagem de acção: "faz isto agora", "até às 18h", "20 minutos é suficiente".
+- Se há escola ou treino no contexto, integra no plano.`},
+
+  terapeuta:{name:'Terapeuta',icon:'🧠',sys:`Você é um terapeuta CBT empático. Não dás conselhos directamente — fazes perguntas que levam à clareza.
+
+REGRAS:
+- Valida antes de sugerir. Sempre.
+- Uma pergunta por resposta. Só uma.
+- Não citas estudos a não ser que o utilizador pergunte.
+- Resposta máxima: 120 palavras.
+- Se detectas padrão negativo repetido, nomeias-o com cuidado.`},
+
+  cientista:{name:'Cientista',icon:'🔬',sys:`Você é um neurocientista que transforma ciência em acção prática imediata.
+
+REGRAS:
+- Cita 1-2 estudos reais por resposta (autor + ano).
+- Explica o mecanismo neural em 1 frase simples.
+- Termina SEMPRE com "aplicação prática: [acção concreta hoje]".
+- Resposta máxima: 200 palavras.
+- Nunca repetes estudos que já citaste nesta conversa.`},
+
+  trainer:{name:'Trainer',icon:'🏋️',sys:`Você é o personal trainer de calistenia do Kark. Conhece o plano actual (Full Body Nível 2: Pseudo Planche, Dragon flag, Hollow hold, Handstand, etc.).
+
+REGRAS:
+- Adapta ao dia actual (Seg=Push+Core, Ter=Recuperação, Qua=Core+Pernas, Qui=Skill, Sex=Força Total, Sáb=Técnica, Dom=Descanso).
+- Foca em forma técnica e progressão segura.
+- Se o punho doer, adapta imediatamente.
+- Resposta máxima: 160 palavras.`},
+
+  filosofo:{name:'Filósofo',icon:'🏛️',sys:`Você é um filósofo estóico-existencialista. Marcus Aurelius, Epicteto, Nietzsche, Frankl são as tuas referências.
+
+REGRAS:
+- Usa 1 citação filosófica real por resposta.
+- Conecta a filosofia ao problema concreto do utilizador.
+- Nunca moraliza. Apresenta perspectiva, não julgamento.
+- Resposta máxima: 150 palavras.`},
+
+  socratico:{name:'Socrático',icon:'🤔',sys:`Você é Sócrates. Nunca responde directamente. Faz perguntas que guiam à clareza própria.
+
+REGRAS:
+- Máximo 2 perguntas por resposta, idealmente 1.
+- Questiona premissas ocultas na pergunta do utilizador.
+- Se o utilizador der uma resposta superficial, vai mais fundo.
+- Resposta máxima: 80 palavras.`}
 };
 
 const PROVIDERS={
@@ -4237,12 +4295,87 @@ function toggleChatHistory(){
 function quickAI(q){const el=document.getElementById('aiIn');if(el)el.value=q;sendAI()}
 function qaBtn(i){if(window._QP&&window._QP[i])quickAI(window._QP[i][1])}
 function renderChat(){if(!S.aiHistory?.length)return`<div style="text-align:center;color:var(--tx3);font-size:.78em;padding:20px 10px">Olá ${S.name||'amigo'}! Sou o teu Coach IA. Faz-me uma pergunta ou usa os atalhos acima.</div>`;return S.aiHistory.map(m=>m.role==='user'?`<div style="display:flex;justify-content:flex-end"><div class="user-bub">${m.content}</div></div>`:`<div style="display:flex;gap:7px;align-items:flex-start"><div class="ai-av">🧠</div><div class="ai-bub">${m.content.replace(/\n/g,'<br>').replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\*(.*?)\*/g,'<em>$1</em>')}</div></div>`).join('')}
-function buildCtx(){const tk=tkey(),sl=S.sleep[tk]||{},wt=S.water[tk]||0,md=S.mood[tk],bf=S.brainFood[tk]||{};
-  const mode=AI_MODES[S.aiMode||'coach'];
-  const last7sleep=Object.keys(S.sleep||{}).sort().slice(-7).map(k=>`${k}: ${S.sleep[k].h||0}h`).join(', ');
-  const aiMem=(S.aiMemory||[]).slice(-5).map(m=>m.fact).join('; ');return`Utilizador: ${S.name||'Anónimo'} | Semana: ${S.view+1} | Streak: ${S.streak} dias | Brain Score: ${calcScore()} | Sono hoje: ${sl.h||'N/A'}h Q${sl.q||'N/A'}/5 | Água: ${wt}/8 | Humor: ${md!==undefined?MOODS[md]+' ('+MLBL[md]+')':'N/A'} | Brain food: ${Object.values(bf).filter(Boolean).length}/12 | Pomodoros: ${S.pomT} | Nível: ${S.level} | Desafios: ${(S.challenges||[]).join(', ')||'N/A'} | Objetivos: ${(S.goals||[]).join(', ')||'N/A'} | XP: ${S.xp} | Conquistas: ${S.unlocked?.length||0}/${ACH.length} | Hoje: ${new Date().toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long'})}`}
-function getSysPr(){const mode=AI_MODES[S.aiMode||'coach'];const mem=buildCtx();return`${mode.sys}\n\nMáx 280 palavras. Formato natural com **negrito** para pontos-chave.\n\nMemória de longo prazo do utilizador: ${(S.aiMemory||[]).map(m=>m.fact).join('; ')||'Nenhuma ainda.'}\n\nContexto actual: ${buildCtx()}`}
+function buildCtx(){
+  const tk=tkey();
+  const sl=S.sleep[tk]||{};
+  const wt=S.water[tk]||0;
+  const md=S.mood[tk];
+  const bf=S.brainFood[tk]||{};
+  const bf_count=Object.values(bf).filter(Boolean).length;
+  
+  // Last 7 days sleep
+  const last7sl=Object.keys(S.sleep||{}).sort().slice(-7).map(k=>{
+    const d=S.sleep[k];return`${k.slice(5)}: ${d?.h||0}h Q${d?.q||'?'}/5`;
+  }).join(' | ');
+  
+  // Today's workout day
+  const dn=['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'][new Date().getDay()];
+  const wo=typeof getWO==='function'?getWO():null;
+  const todayWo=wo?wo[dn]:null;
+  const woFocus=todayWo?.focus||'N/A';
+  const woExercises=todayWo?.exercises?.map(e=>e.name).join(', ')||'descanso';
+  
+  // Workout completion today
+  const wsSets=S.workoutSets?.[tk]||{};
+  const woTotal=todayWo?.exercises?.reduce((a,e)=>a+e.sets,0)||0;
+  const woDone=Object.values(wsSets).reduce((a,s)=>a+(Array.isArray(s)?s.filter(Boolean).length:0),0);
+  
+  // Journal today
+  const hasJournal=!!(S.journal?.[tk]);
+  const mit=S.intentions?.[tk]||'não definido';
+  
+  // Last AI memory facts
+  const memories=(S.aiMemory||[]).slice(-8).map(m=>m.fact).join(' | ')||'nenhuma';
+  
+  // Hour and context
+  const hour=new Date().getHours();
+  const timeContext=hour<6?'madrugada':hour<12?'manhã':hour<14?'almoço':hour<18?'tarde':hour<21?'noite':'noite tardia';
+  
+  // Brain score trend
+  const scores=Object.values(S.brainscore||{}).slice(-7);
+  const avgScore=scores.length?Math.round(scores.reduce((a,v)=>a+v,0)/scores.length):0;
+  
+  return `=== CONTEXTO DO KARK (${new Date().toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long'})}) ===
+Hora: ${new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})} (${timeContext})
+Nome: ${S.name||'Kark'} | Nível: ${S.level} ${typeof getTitle==='function'?getTitle(S.level):''} | XP: ${S.xp}
+Streak: ${S.streak} dias | Best: ${S.bestStreak||0} | Brain Score hoje: ${calcScore()} | Média 7d: ${avgScore}
 
+HOJE:
+- Sono: ${sl.h||'não registado'}h Q${sl.q||'?'}/5 | Água: ${wt}/8 copos | Brain food: ${bf_count}/12
+- Humor: ${md!==undefined&&typeof MOODS!=='undefined'?MOODS[md]+' ('+MLBL[md]+')':'não registado'}
+- MIT (prioridade): ${mit}
+- Diário: ${hasJournal?'escrito':'não escrito'}
+- Pomodoros: ${S.pomT||0} | Tempo de foco: ${Math.floor((S.focusMin||0)/60)}h${(S.focusMin||0)%60}min
+
+TREINO HOJE (${dn}): ${woFocus}
+Exercícios: ${woExercises}
+Progresso: ${woDone}/${woTotal} séries concluídas
+
+SONO ÚLTIMOS 7 DIAS: ${last7sl||'sem dados'}
+
+METAS E DESAFIOS: ${(S.goals||[]).join(', ')||'não definidos'}
+Desafios: ${(S.challenges||[]).join(', ')||'não definidos'}
+Objectivo semanal: ${S.weeklyGoal||'não definido'}
+
+MEMÓRIAS IMPORTANTES: ${memories}
+=== FIM DO CONTEXTO ===`;
+}
+function getSysPr(){
+  const mode=AI_MODES[S.aiMode||'coach'];
+  const ctx=buildCtx();
+  const histLen=(S.aiHistory||[]).length;
+  
+  return mode.sys + `
+
+CONTEXTO COMPLETO:
+${ctx}
+
+INSTRUÇÕES ADICIONAIS:
+- Esta é a mensagem ${histLen+1} desta conversa.
+- ${histLen>0?'Mantém continuidade — não te apresentas de novo, não repetires contexto já dito.':'Primeira mensagem — apresenta-te brevemente e faz 1 pergunta específica OU dá 1 insight imediato com base nos dados.'}
+- Língua: português de Moçambique/Brasil. Informal mas inteligente.
+- NUNCA uses tabelas com dados zerados. NUNCA repitas o que disseste antes.`;
+}
 async function sendAI(){S.chatCollapsed=false;const msg=document.getElementById('aiIn')?.value?.trim();if(!msg)return;const p=S.aiProvider||'anthropic',key=(S.apiKeys||{})[p];if(!key){toast('⚠️ Cola a API Key acima!');return}const btn=document.getElementById('aiBtn');if(btn){btn.textContent='⏳';btn.disabled=true}S.aiHistory=S.aiHistory||[];S.aiHistory.push({role:'user',content:msg});const box=document.getElementById('chatBox');if(box){box.innerHTML=renderChat();const wait=document.createElement('div');wait.className='fu';wait.innerHTML=`<div style="display:flex;gap:7px;align-items:flex-start"><div class="ai-av">🧠</div><div class="ai-bub" style="display:flex;gap:4px;padding:12px"><div class="ai-dot"></div><div class="ai-dot"></div><div class="ai-dot"></div></div></div>`;box.appendChild(wait);box.scrollTop=box.scrollHeight;
   // Show skeleton in response area
   wait.innerHTML=`<div style="display:flex;gap:8px;align-items:flex-start"><div class="ai-av">🧠</div><div style="flex:1"><div class="skeleton" style="height:12px;width:70%;margin-bottom:6px;border-radius:6px"></div><div class="skeleton" style="height:12px;width:90%;margin-bottom:6px;border-radius:6px"></div><div class="skeleton" style="height:12px;width:55%;border-radius:6px"></div></div></div>`;
@@ -4278,8 +4411,10 @@ if(p==='anthropic'){
     reply=d.choices?.[0]?.message?.content||'Sem resposta.';
   }
 S.aiHistory.push({role:'assistant',content:reply});S.aiChats=(S.aiChats||0)+1;save();checkAch();addXP(5);
-// Extract memory facts from reply
-if(reply.includes('**')){const facts=reply.match(/\*\*([^*]{5,60})\*\*/g)?.slice(0,2)||[];facts.forEach(f=>{const fact=f.replace(/\*/g,'');if(!S.aiMemory.some(m=>m.fact===fact)){S.aiMemory.push({fact,date:tkey()});if(S.aiMemory.length>20)S.aiMemory.shift();save()}})}
+// Extract memory facts from reply + user message
+if(reply.includes('**')){const facts=reply.match(/\*\*([^*]{5,60})\*\*/g)?.slice(0,2)||[];facts.forEach(f=>{const fact=f.replace(/\*/g,'');if(!S.aiMemory.some(m=>m.fact===fact)){S.aiMemory.push({fact,date:tkey()});if(S.aiMemory.length>30)S.aiMemory.shift();save()}})}
+// Save key user info
+if(msg&&msg.length>15&&msg.length<200){const userFact='Kark disse ('+tkey()+'): '+msg.slice(0,120);if(!S.aiMemory.some(m=>m.fact.includes('Kark disse ('+tkey()+')'))){S.aiMemory.push({fact:userFact,date:tkey()});if(S.aiMemory.length>30)S.aiMemory.shift();save();}}
 }catch(err){
   // retry once
   try{
